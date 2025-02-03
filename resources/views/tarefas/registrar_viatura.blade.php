@@ -25,6 +25,7 @@
             </select>
         </div>
 
+        &nbsp;
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text sp-nel border-nel-2">Tipo</span>
@@ -36,7 +37,8 @@
                 @endforeach
             </select>
         </div >
-            
+        
+        &nbsp;
         <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text sp-nel border-nel-2">Cor</span>
@@ -66,6 +68,7 @@
                 <input type="text" name="placa" class="form-control border-nel-2" placeholder="Placa" required>
             </div>
 
+            &nbsp;
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text sp-nel border-nel-2">Fabricação</span>
@@ -73,6 +76,7 @@
                 <input type="text" name="fabricacao" class="form-control border-nel-2" placeholder="Fabricação" required>
             </div>
 
+            &nbsp;
             <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text sp-nel border-nel-2">Ano</span>

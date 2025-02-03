@@ -46,6 +46,18 @@ tr:nth-child(even) {
 
 .border-nel-2 {
     border-color: #244f6b;
+
+    width: 120px;
+}
+
+.sp-nel-3 {
+    background-color:#007BFF;
+    color: white;
+}
+
+.border-nel-3 {
+    border-color: #007BFF;
+    width: 160px;
 }
 
 /*

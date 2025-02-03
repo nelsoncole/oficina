@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UtilizadorController;
 use App\Http\Controllers\FormularioController;
 use App\Http\Controllers\CarroController;
+use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,34 +42,24 @@ Route::get('/secretaria', function () {
     $carro = new CarroController();
     $query_carros = $carro->index();
 
-    $utilizador = new UtilizadorController();
+    $utilizador = new UserController();
     $query_utilizadores = $utilizador->index();
 
     return view('secretaria', compact('formulario','enum_cor','enum_marca','enum_tipo','query_carros','query_utilizadores'));
-})->name('formulario');
+});//->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
 
 // Rotas para processar os formulários
 Route::post('/registrar_viatura', [CarroController::class, 'store'])->name('carro.registrar');
+Route::post('/funcionario', [FuncionarioController::class, 'store'])->name('funcionario.registrar');
 
-// Rota de login
-/*Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+// login
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
-
-// Rota protegida
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
 
 // Logout
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-*/
 
-// Utilizador e Login
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-
-Route::post('/login', [UtilizadorController::class, 'login']);
+// Página do formulário de registro
+Route::get('/signup', [LoginController::class, 'showRegisterForm'])->name('signup');
+Route::post('/signup', [LoginController::class, 'signup'])->name('signup.post');

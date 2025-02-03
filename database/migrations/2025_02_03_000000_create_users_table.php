@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('utilizadors', function (Blueprint $table) {
-            $table->bigIncrements('id_utilizador');
+        Schema::create('users', function (Blueprint $table) {
+            $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            
+
             $table->enum('nivel_de_acesso', ['Administrador', 'Gerente', 'Secretário', 'Técnico', 'Cliente']);
             $table->unsignedBigInteger('id_cliente')->nullable();
             $table->unsignedBigInteger('id_funcionario')->nullable();
             $table->foreign('id_cliente')->references('id_cliente')->on('clientes')->onDelete('set null');
             $table->foreign('id_funcionario')->references('id_funcionario')->on('funcionarios')->onDelete('set null');
+
             $table->timestamps();
         });
     }
@@ -33,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('utilizadors');
+        Schema::dropIfExists('users');
     }
 };

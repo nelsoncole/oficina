@@ -9,9 +9,9 @@
                 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text sp-nel border-nel-2">Tipo de Utilizador</span>
+                        <span class="input-group-text sp-nel-3 border-nel-3">Tipo de Utilizador</span>
                     </div>
-                    <select id="selecionar-form" class="form-control border-nel-2" onchange="mostrar_form()">
+                    <select id="selecionar-form" class="form-control border-nel-3" onchange="mostrar_form()">
                         <option value="">Selecione...</option>
                         <option value="op1">Funcionário</option>
                         <option value="op2">Cliente</option>
@@ -21,7 +21,8 @@
 
                 <!-- Formulário 1 - Funcionário -->
                 <div id="form1" style="display: none;">
-                    <form>
+                    <form method='POST' action="{{ route('funcionario.registrar') }}">
+                        @csrf
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -48,7 +49,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text sp-nel border-nel-2" style="width: 80px;">Função</span>
                             </div>
-                            <select id="funcao" class="form-control border-nel-2">
+                            <select name="funcao" class="form-control border-nel-2" required>
                                 <option></option>
                                 <option>Secretário</option>
                                 <option>Técnico</option>
@@ -64,7 +65,11 @@
                             <input type="date" name="data_nascimento" class="form-control border-nel-2" placeholder="Data de Nascimento" required>
                         </div>
 
-                        <button type="button" class="btn btn-primary">Enviar</button>
+                        <div class="input-group mb-3" style="width: 100%; display: flex; justify-content: flex-end;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            &nbsp;
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
 
                     </form>
                 </div>
@@ -73,13 +78,12 @@
                 <div id="form2" style="display: none;">
                     <form>
                         <p>Indisponível, pode criar a nova aconta na página inicial</p>
+                        <div class="input-group mb-3" style="width: 100%; display: flex; justify-content: flex-end;">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        </div>
                     </form>
                 </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar</button>
             </div>
         </div>
     </div>
