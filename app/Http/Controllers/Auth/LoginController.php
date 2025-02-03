@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // Gera um token de autenticação (se estiver usando Laravel Sanctum ou Passport)
-            $token = $user->createToken('auth_token')->plainTextToken;
+            //$token = $user->createToken('auth_token')->plainTextToken;
             
             $request->session()->regenerate(); // Protege contra ataques de sessão fixa
             return redirect()->intended('/secretaria');
