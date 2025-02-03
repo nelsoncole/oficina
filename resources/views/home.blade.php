@@ -24,8 +24,19 @@
 @section('content')
     <div class="card">
         <div class="card-header">Exemplo</div>
-        <div class="card-body">
-            <p>Conteúdo do dashboard aqui.</p>
+            <div class="card-body">
+                <p>Conteúdo do dashboard aqui.</p>
+<!--
+            @if(Auth::check())
+                <p>Bem-vindo, {{ Auth::user()->name }}!</p>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
+            @else
+                <p>Você não está logado. <a href="{{ route('login') }}">Login</a></p>
+            @endif
+-->
         </div>
     </div>
 @endsection

@@ -29,6 +29,10 @@ Route::get('/administrador', function () {
     return view('administrador');
 });
 
+Route::get('/test', function () {
+    return view('test');
+});
+
 
 // Rota para exibir os formulários
 Route::get('/secretaria', function () {
@@ -46,7 +50,7 @@ Route::get('/secretaria', function () {
     $query_utilizadores = $utilizador->index();
 
     return view('secretaria', compact('formulario','enum_cor','enum_marca','enum_tipo','query_carros','query_utilizadores'));
-});//->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
+})->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
 
 // Rotas para processar os formulários
 Route::post('/registrar_viatura', [CarroController::class, 'store'])->name('carro.registrar');

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use IlluminUserate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
@@ -17,30 +17,35 @@ class LoginController extends Controller
 
 
     public function login(Request $request)
-{
-    // Validação dos dados recebidos
+    {
+        // Validação dos dados recebidos
+        $credentials = $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
 
-    // Busca o usuário pelo e-mail
-    $user = User::where('email', $request->email)->first();
+        if (Auth::attempt($credentials)) {
+            // Gera um token de autenticação (se estiver usando Laravel Sanctum ou Passport)
+            $token = $user->createToken('auth_token')->plainTextToken;
+            
+            $request->session()->regenerate(); // Protege contra ataques de sessão fixa
+            return redirect()->intended('/secretaria');
+        }
 
-    // Verifica se a senha está correta
-    if (!$user || !Hash::check($request->password, $user->password)) {
         return response()->json([
             'message' => 'Usuário ou senha incorretos!'
         ], 401);
-    }
-
-    // Gera um token de autenticação (se estiver usando Laravel Sanctum ou Passport)
-    $token = $user->createToken('auth_token')->plainTextToken;
-
-    return redirect('/secretaria');
     
-}
+    }
 
 
     public function logout(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/login');
     }
 
