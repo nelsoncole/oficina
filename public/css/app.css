@@ -60,6 +60,10 @@ tr:nth-child(even) {
     width: 160px;
 }
 
+.border-nel-4 {
+    border-color: #244f6b;
+}
+
 /*
 .modal {
     display: flex !important;

@@ -23,6 +23,9 @@ return new class extends Migration
             $table->enum('estado',['Em Diagnóstico','Aguardando Autorização','Aguardando Peças','Em Manutenção Preventiva','Em Retirada de Componentes','Em Reparação','Em Testes','Pronto para Retirada']);
             $table->string('tipo_de_avaria');
             $table->decimal('preco_de_avaria',8, 2);
+            $table->integer('quantidade');
+            $table->decimal('total', 8, 2);
+            $table->decimal('taxa', 8, 2);
             $table->string('codigo')->unique();
             $table->unsignedBigInteger('id_cliente');
             $table->foreign('id_cliente')->references('id_cliente')->on('clientes')->onDelete('cascade');

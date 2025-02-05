@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Carro;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class CarroController extends Controller
 {
 
@@ -32,8 +34,10 @@ class CarroController extends Controller
 
         $codigo = $controller->getUuid();
         $estado = 'Em Diagnóstico';
-        $tipo_de_avaria = 'Indefinido';
         $preco_de_avaria = 0.0;
+        $quantidade = 0;
+        $total = 0.0;
+        $taxa = 0.0;
 
         $carro = new Carro ;
         $carro->cor = $request->cor;
@@ -44,13 +48,33 @@ class CarroController extends Controller
         $carro->ano= $request->ano;
         $carro->tipo = $request->tipo;
         $carro->estado = $estado;
-        $carro->tipo_de_avaria = $tipo_de_avaria;
+        $carro->tipo_de_avaria = $request->tipo_de_avaria;
         $carro->preco_de_avaria = $preco_de_avaria;
+        $carro->quantidade = $quantidade;
+        $carro->total = $total;
+        $carro->taxa = $taxa;
         $carro->codigo = $codigo;
         $carro->id_cliente = $request->id_cliente;
         $carro->save();
 
-        //return redirect(route('registrar_viatura'))->with('message', 'Registo efectuado com sucesso');
+        $dados = [
+            'titulo' => 'Oficina',
+            'nome' => '--',
+            'modelo' => $request->modelo ?? 'Sem modelo',
+            'marca' => $request->marca ?? 'Sem marca',
+            'placa' => $request->placa ?? 'Sem placa',
+            'fabricacao' => $request->fabricacao ?? 'Desconhecido',
+            'ano' => $request->ano ?? 'Desconhecido',
+            'cor' => $request->cor ?? 'Desconhecida',
+            'tipo' => $request->tipo ?? 'Desconhecido',
+            'estado' => $estado ?? 'Não informado',
+            'tipo_de_avaria' => $request->tipo_de_avaria ?? 'Não informado',
+            'qr_code' => $codigo,
+        ];
+        
+
+        return view('confirmar', compact('dados'));
+
         return redirect()->route('formulario', ['form' => 'registrar_viatura']) ->with('mensagem', 'Registo efectuado com sucesso!');
     
     }    

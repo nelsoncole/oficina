@@ -30,6 +30,7 @@ class LoginController extends Controller
             
             $request->session()->regenerate(); // Protege contra ataques de sessão fixa
             return redirect()->intended('/secretaria');
+        
         }
 
         return response()->json([

@@ -50,8 +50,9 @@
                     <td>{{$carros->tipo}}</td>
                     <td>{{$carros->estado}}</td>
                     <td style="text-align: center;">
-                    <a href="#" id="btn-form2" class="nav-link" style="padding: 0; margin: 0;">
+                        <a href="#" id="btn-form2" class="nav-link btn btn-sm btn-primary" title="Editar ou Registro" style="padding: 0; margin: 0;">
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            <!--span class="bi bi-pencil">Editar</span-->
                         </a>
                     </td>
                 </tr>

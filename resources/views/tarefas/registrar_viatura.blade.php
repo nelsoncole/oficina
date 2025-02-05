@@ -1,6 +1,9 @@
 <?php
-// Formulário cadastrar 
+// Formulário cadastrar
+$tuplaJSON = json_encode($query_servicos);
 ?>
+
+<div class="text-center"><h3>REGISTRO DE CARROS</h3></div>
 
 <form method='POST' action="{{ route('carro.registrar') }}">
     @csrf
@@ -134,7 +137,48 @@
         </div>
 
         <div class="input-group mb-3">
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            <div class="input-group-prepend">
+                <span class="input-group-text sp-nel border-nel-2">Tipo de Avaria</span>
+            </div>
+            
+            <input type="text" name="tipo_de_avaria" style="width: 70%;" id="id_tipo_avaria" class="form-control border-nel-2" placeholder="Tipo de Avaria" readonly required>
+            
+            <select class="form-control border-nel-2" id="id_avaria" style="width: 10%;">
+                <option value="">Avaria...</option>
+                @foreach($query_servicos as $value)
+                <option  value="{{ $value->descricao }}">{{ ucfirst($value->descricao) }}</option>
+                @endforeach
+            </select>
         </div>
-</form>
+
+        @include('tarefas.model.model_cobrancas_de_taxa_parque')
+        <div class="input-group mb-3">
+            <button type="button" onclick="ModelCobrancasTaxa()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#model_cobrancas_de_taxa_parque">Registrar</button>
+            &nbsp;
+            <button type="button" onclick="Limpar()" class="btn btn-nel">Limpar</button>
+        </div>
    
+</form>
+
+<script>
+    var servicos = <?php echo $tuplaJSON;  ?>; 
+    var quantidade = 0;
+    document.addEventListener("DOMContentLoaded", function(){
+        document.getElementById("id_avaria").addEventListener("change", function(){
+            if(this.value){
+                quantidade += servicos[this.selectedIndex-1].valor;
+            
+                document.getElementById("st_cobrancas").value = parseFloat(quantidade);
+                document.getElementById("id_tipo_avaria").value += this.value + "; ";
+            }
+        });
+    });
+
+    function Limpar(){
+        quantidade = 0;
+        document.getElementById("st_cobrancas").value = parseFloat(quantidade);
+        document.getElementById("id_tipo_avaria").value = "";
+    }
+</script>
+
+

@@ -1,42 +1,36 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    
+    <!-- AdminLTE CSS -->
+    <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
 
-@section('title', 'Home')
-@section('header', 'Bem-vindo ao AdminLTE com Laravel')
-
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="#" class="brand-link">
-        <span class="brand-text font-weight-light">AdminLTE Laravel</span>
-    </a>
-    <div class="sidebar">
-        <nav>
-            <ul class="nav nav-pills nav-sidebar flex-column" role="menu">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+    
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>Dashboard 1</p>
-                    </a>
+                    <a class="nav-link" href="{{ route('login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('signup') }}">Cadastrar</a>
                 </li>
             </ul>
-        </nav>
-    </div>
-</aside>
-
-@section('content')
-    <div class="card">
-        <div class="card-header">Exemplo</div>
-            <div class="card-body">
-                <p>Conteúdo do dashboard aqui.</p>
-<!--
-            @if(Auth::check())
-                <p>Bem-vindo, {{ Auth::user()->name }}!</p>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit">Logout</button>
-                </form>
-            @else
-                <p>Você não está logado. <a href="{{ route('login') }}">Login</a></p>
-            @endif
--->
         </div>
     </div>
-@endsection
+</nav>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
