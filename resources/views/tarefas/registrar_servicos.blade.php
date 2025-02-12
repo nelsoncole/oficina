@@ -30,9 +30,9 @@
 <div class="panel-heading text-center"><h3>SERVIÇOS</h3></div>
 <div class="panel-body table-responsive p-0">
     <div class="input-group mb-3">
-        <button type="submit" class="btn btn-nel">Imprimir</button>
+        <button onclick="gerarPDFListaServicos()" class="btn btn-nel">Imprimir</button>
     </div> 
-    <table class="table table-hover text-nowrap">
+    <table class="table table-hover text-nowrap" id="id_tabela_servicos">
             <thead>
                 <tr>
                     <th>Nº</th>
@@ -62,3 +62,25 @@
     </div>
 </div>
 
+<script>
+    function gerarPDFListaServicos() {
+        // Carrega jsPDF
+        const { jsPDF } = window.jspdf;
+        //const doc = new jsPDF(); // folha na vertical
+        const doc = new jsPDF({ orientation: "landscape" }); // folha na horizontal
+
+
+        // Adiciona um título ao PDF
+        doc.text("Lista de Serviços", 14, 10);
+
+        // Converte a tabela HTML para PDF
+        doc.autoTable({ html: '#id_tabela_servicos', startY: 20 });
+
+        // Baixa o PDF
+        //doc.save('carros.pdf');
+
+        // Gera um Blob URL e abre numa nova aba
+        const pdfURL = doc.output('bloburl');
+        window.open(pdfURL, '_blank');
+    }
+</script>

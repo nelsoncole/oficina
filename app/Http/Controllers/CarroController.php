@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Carro;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -15,6 +17,31 @@ class CarroController extends Controller
     {
         $carros = Carro::all();
         return $carros;
+    }
+
+    public function cliente()
+    {
+        $id = Auth::user()->id_cliente;
+        $carros = Carro::where('id_cliente', $id)->get(); // Retorna todos os carros do cliente
+        return $carros;
+    }
+
+    public function updateEstado(Request $request)
+    {
+        $this->validate($request, [
+            'codigo' => 'required|string|max:255',
+            'estado' => 'required|string|max:255',
+        ]);
+        // Encontra o usuário pelo ID
+        $carro = Carro::where('codigo', $request->codigo)->update(['estado' => $request->estado]);
+
+        // Verifica se existe
+        if (!$carro) {
+            return back()->with('error', 'O carro nao existe');
+        }
+
+
+        return back()->with('success', 'Actualização feito com sucesso!');
     }
 
     public function store(Request $request)
@@ -39,7 +66,7 @@ class CarroController extends Controller
         $total = 0.0;
         $taxa = 0.0;
 
-        $carro = new Carro ;
+        $carro = new Carro();
         $carro->cor = $request->cor;
         $carro->marca = $request->marca;
         $carro->modelo = $request->modelo;
@@ -75,7 +102,7 @@ class CarroController extends Controller
 
         return view('confirmar', compact('dados'));
 
-        return redirect()->route('formulario', ['form' => 'registrar_viatura']) ->with('mensagem', 'Registo efectuado com sucesso!');
-    
+        //return back()->with('success', 'Registro feito com sucesso!');
+
     }    
 }

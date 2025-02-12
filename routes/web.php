@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServicoController;
+use App\Http\Controllers\ClienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,26 +27,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/administrador', function () {
-    return view('administrador');
-});
 
-
-Route::get('/secretaria', [Controller::class,'RotaSecretaria'
-])->name('formulario')->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
-
-// Rota para exibir os formulários
-Route::get('/admin', [Controller::class,'RotaAdmin'
-])->name('formulario2')->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
-
-Route::get('/gerente', [Controller::class,'RotaGerente'
-])->name('formulario3')->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
-
-Route::get('/tecnico', [Controller::class,'RotaTecnico'
-])->name('formulario4')->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
-
-Route::get('/cliente', [Controller::class,'RotaCliente'
-])->name('formulario5')->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
+Route::get('/autotech', [Controller::class,'autotech'
+])->name('autotech')->middleware('auth'); // 🔒 Apenas usuários autenticados podem acessar
 
 // Rotas para processar os formulários
 Route::post('/registrar_viatura', [CarroController::class, 'store'])->name('carro.registrar');
@@ -57,21 +41,16 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // Logout
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // Página do formulário de registro
-Route::get('/signup', [LoginController::class, 'showRegisterForm'])->name('signup');
-Route::post('/signup', [LoginController::class, 'signup'])->name('signup.post');
+Route::get('/criar', [ClienteController::class, 'showRegisterForm'])->name('criar');
+Route::post('/criar', [ClienteController::class, 'criar'])->name('criar.post');
 
 // Generico
 Route::get('/Recibo', [Controller::class, 'gerarPDFCarro'])->name('gerar.carro.pdf');
 
-
-
-// Teste
-Route::get('/test', function () {
-    return view('test');
-});
-Route::get('/qrcode', [Controller::class, 'gerarQRCode'])->name('qrcode.view');
+//Carro
+Route::post('/updateEstado', [CarroController::class, 'updateEstado'])->name('carro.updateEstado');
 

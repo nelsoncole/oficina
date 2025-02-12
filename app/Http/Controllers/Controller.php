@@ -30,6 +30,10 @@ class Controller extends BaseController
         return $this->getEnum('carros', 'tipo');
     }
 
+    public function getEnumEstadoCorro(){
+        return $this->getEnum('carros', 'estado');
+    }
+
     private function getEnum($tabela, $coluna)
     {
         
@@ -77,48 +81,27 @@ class Controller extends BaseController
         // return $pdf->download(documento.pdf); // para forcar o download
     }
 
-    public function RotaSecretaria(){
-        $formulario = request('form') ?? 'registrar_viatura';
-    $controller = new Controller();
+    public function autotech(){
+        
+        $controller = new Controller();
     
-    $enum_cor=$controller->getEnumColorCorro();
-    $enum_marca=$controller->getEnumMarcaCorro();
-    $enum_tipo=$controller->getEnumTipoCorro();
+        $enum_cor=$controller->getEnumColorCorro();
+        $enum_marca=$controller->getEnumMarcaCorro();
+        $enum_tipo=$controller->getEnumTipoCorro();
+        $enum_carro_estado=$controller->getEnumEstadoCorro();
 
-    $carro = new CarroController();
-    $query_carros = $carro->index();
+        $carro = new CarroController();
+        $query_carros = $carro->index();
 
-    $utilizador = new UserController();
-    $query_utilizadores = $utilizador->index();
+        $utilizador = new ClienteController();
+        $query_utilizadores = $utilizador->index();
 
-    $servicos = new ServicoController();
-    $query_servicos = $servicos->index();
+        $servicos = new ServicoController();
+        $query_servicos = $servicos->index();
 
-    return view('secretaria', compact('formulario','enum_cor','enum_marca','enum_tipo','query_carros','query_utilizadores','query_servicos'));
-    }
+        $query_carros_cliente = $carro->cliente();
 
-    public function RotaAdmin(){
-        $formulario = request('form') ?? 'registrar_viatura';
-    
-        return view('secretaria', compact('formulario'));
-    }
-
-    public function RotaTecnico(){
-        $formulario = request('form') ?? 'registrar_viatura';
-    
-        return view('secretaria', compact('formulario'));
-    }
-
-    public function RotaGerente(){
-        $formulario = request('form') ?? 'registrar_viatura';
-    
-        return view('secretaria', compact('formulario'));
-    }
-
-    public function RotaCliente(){
-        $formulario = request('form') ?? 'registrar_viatura';
-    
-        return view('secretaria', compact('formulario'));
+        return view('autotech', compact('enum_cor','enum_marca','enum_tipo','query_carros','query_utilizadores','query_servicos','query_carros_cliente','enum_carro_estado'));
     }
 
 }

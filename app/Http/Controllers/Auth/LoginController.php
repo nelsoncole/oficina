@@ -12,9 +12,12 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        if (Auth::check()) {
+            return redirect()->intended('/autotech');
+        }
+
         return view('auth.login');
     }
-
 
     public function login(Request $request)
     {
@@ -29,13 +32,12 @@ class LoginController extends Controller
             //$token = $user->createToken('auth_token')->plainTextToken;
             
             $request->session()->regenerate(); // Protege contra ataques de sessão fixa
-            return redirect()->intended('/secretaria');
-        
+
+            return redirect()->intended('/autotech');
+
         }
 
-        return response()->json([
-            'message' => 'Usuário ou senha incorretos!'
-        ], 401);
+        return back()->with('error', 'Usuário ou senha incorretos!');
     
     }
 
@@ -48,34 +50,5 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
-    }
-
-
-    public function showRegisterForm()
-    {
-        return view('auth.signup');
-    }
-
-    // Função para cadastrar um novo usuário
-    public function signup(Request $request)
-    {
-        // Validação dos dados recebidos
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|unique:users',
-            'password' => 'required|string|min:4'
-        ]);
-
-        // Criando usuário e hash da senha com Bcrypt automaticamente
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password), // Criptografa a senha
-        ]);
-
-        return response()->json([
-            'message' => 'Usuário cadastrado com sucesso!',
-            'user' => $user
-        ], 201);
     }
 }

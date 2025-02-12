@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Feb 05, 2025 at 08:02 AM
+-- Generation Time: Feb 05, 2025 at 09:41 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -55,7 +55,9 @@ CREATE TABLE `carros` (
 INSERT INTO `carros` (`id_carro`, `modelo`, `placa`, `fabricacao`, `ano`, `cor`, `marca`, `tipo`, `estado`, `tipo_de_avaria`, `preco_de_avaria`, `quantidade`, `total`, `taxa`, `codigo`, `id_cliente`, `created_at`, `updated_at`) VALUES
 (65, 'Rav4', '12HA09', 6532, 2020, 'Preto', 'Toyota', 'Civil', 'Em Diagnóstico', 'Motor;', '0.00', 0, '0.00', '0.00', 'F5FED0DA', 1, '2025-02-05 03:43:50', '2025-02-05 03:43:50'),
 (66, 'i10', '28HL3', 5464634, 2020, 'Preto', 'Nissan', 'Civil', 'Em Diagnóstico', 'Motor; Caixa;', '0.00', 0, '0.00', '0.00', '54303132', 1, '2025-02-05 03:53:59', '2025-02-05 03:53:59'),
-(67, 'L200', '17LD1', 20001, 2019, 'Vermelho', 'Mitsubishi', 'Civil', 'Em Diagnóstico', 'Motor;', '0.00', 0, '0.00', '0.00', '193DD8F6', 1, '2025-02-05 03:57:46', '2025-02-05 03:57:46');
+(67, 'L200', '17LD1', 20001, 2019, 'Vermelho', 'Mitsubishi', 'Civil', 'Em Diagnóstico', 'Motor;', '0.00', 0, '0.00', '0.00', '193DD8F6', 1, '2025-02-05 03:57:46', '2025-02-05 03:57:46'),
+(68, 'Hiace', 'KS12-05', 534327, 2018, 'Preto', 'Toyota', 'Civil', 'Em Diagnóstico', 'Motor; Caixa;', '0.00', 0, '0.00', '0.00', '54E27730', 1, '2025-02-05 07:13:20', '2025-02-05 07:13:20'),
+(69, 'L200', 'LD12-09', 8345649, 2018, 'Preto', 'Mitsubishi', 'Civil', 'Em Diagnóstico', 'Troca de Óleo e Filtro; Motor; Caixa;', '0.00', 0, '0.00', '0.00', 'D1D7D515', 1, '2025-02-05 07:20:29', '2025-02-05 07:20:29');
 
 -- --------------------------------------------------------
 
@@ -358,7 +360,8 @@ CREATE TABLE `servicos` (
 
 INSERT INTO `servicos` (`id_servico`, `descricao`, `valor`, `created_at`, `updated_at`) VALUES
 (1, 'Motor', 20000.00, '2025-02-04 19:03:45', '2025-02-04 19:03:45'),
-(2, 'Caixa', 15000.00, '2025-02-04 19:06:26', '2025-02-04 19:06:26');
+(2, 'Caixa', 15000.00, '2025-02-04 19:06:26', '2025-02-04 19:06:26'),
+(4, 'Troca de Óleo e Filtro', 5000.00, '2025-02-05 07:18:40', '2025-02-05 07:18:40');
 
 -- --------------------------------------------------------
 
@@ -385,7 +388,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `nivel_de_acesso`, `id_cliente`, `id_funcionario`, `created_at`, `updated_at`) VALUES
-(1, 'nelsoncole', '200097', NULL, '$2y$12$ixJG5aHdD0qVEGVmN5D0hO8pZe1id0fIsJyJ2ILHIZC4cAiXBFIDC', NULL, 'Administrador', 1, NULL, NULL, NULL);
+(2, 'nelsoncole', '200097', NULL, '$2y$12$ixJG5aHdD0qVEGVmN5D0hO8pZe1id0fIsJyJ2ILHIZC4cAiXBFIDC', NULL, 'Secretário', 1, NULL, NULL, NULL),
+(5, 'albertito', '200142', NULL, '$2y$12$ixJG5aHdD0qVEGVmN5D0hO8pZe1id0fIsJyJ2ILHIZC4cAiXBFIDC', NULL, 'Cliente', NULL, NULL, NULL, NULL),
+(6, 'simaopedro', '180401', NULL, '$2y$12$ixJG5aHdD0qVEGVmN5D0hO8pZe1id0fIsJyJ2ILHIZC4cAiXBFIDC', NULL, 'Administrador', NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -533,7 +538,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `carros`
 --
 ALTER TABLE `carros`
-  MODIFY `id_carro` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id_carro` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `cidades`
@@ -617,13 +622,13 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT for table `servicos`
 --
 ALTER TABLE `servicos`
-  MODIFY `id_servico` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_servico` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

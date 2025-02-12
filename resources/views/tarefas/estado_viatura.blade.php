@@ -18,9 +18,9 @@
 <div class="panel-heading text-center"><h3>LISTA DE CARROS</h3></div>
 <div class="panel-body table-responsive p-0">
     <div class="input-group mb-3">
-        <button type="submit" class="btn btn-nel">Imprimir Relatorio</button>
+        <button onclick="gerarPDFListaCarros()" class="btn btn-nel">Imprimir Relatorio</button>
     </div> 
-    <table class="table table-hover text-nowrap">
+    <table class="table table-hover text-nowrap" id="id_tabela_carros">
             <thead>
                 <tr>
                     <th>Nº</th>
@@ -50,7 +50,7 @@
                     <td>{{$carros->tipo}}</td>
                     <td>{{$carros->estado}}</td>
                     <td style="text-align: center;">
-                        <a href="#" id="btn-form2" class="nav-link btn btn-sm btn-primary" title="Editar ou Registro" style="padding: 0; margin: 0;">
+                        <a href="#" onclick="Celula(this, 1)" data-bs-toggle="modal" data-bs-target="#model_actualizar_carro" class="nav-link btn btn-sm btn-primary" title="Editar ou Registro" style="padding: 0; margin: 0;">
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
                             <!--span class="bi bi-pencil">Editar</span-->
                         </a>
@@ -61,3 +61,39 @@
         </table>
     </div>
 </div>
+
+@include('tarefas.model.model_actualizar_carro')
+
+<script>
+    function Celula(link, i) {
+        event.preventDefault(); // Impede a navegação do link
+        // Encontra a linha (<tr>) onde o link foi clicado
+        var linha = link.closest("tr");
+
+        // Captura a célula específica com base no índice
+        var celula = linha.getElementsByTagName("td")[i];
+
+        document.getElementById("id_model_codeID").value = celula.innerText;
+    }
+
+    function gerarPDFListaCarros() {
+        // Carrega jsPDF
+        const { jsPDF } = window.jspdf;
+        //const doc = new jsPDF(); // folha na vertical
+        const doc = new jsPDF({ orientation: "landscape" }); // folha na horizontal
+
+
+        // Adiciona um título ao PDF
+        doc.text("Lista de Carros", 14, 10);
+
+        // Converte a tabela HTML para PDF
+        doc.autoTable({ html: '#id_tabela_carros', startY: 20 });
+
+        // Baixa o PDF
+        //doc.save('carros.pdf');
+
+        // Gera um Blob URL e abre numa nova aba
+        const pdfURL = doc.output('bloburl');
+        window.open(pdfURL, '_blank');
+    }
+</script>

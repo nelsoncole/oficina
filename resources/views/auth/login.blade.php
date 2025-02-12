@@ -8,17 +8,24 @@
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/css/fontawesome.min.css') }}">
 </head>
 <body class="hold-transition login-page">
+
+    <?php
+        if (Auth::check()) {
+            return redirect()->route('formulario');
+        } 
+    ?>
+
     <div class="login-box">
         <div class="login-logo">
             <a href="#"><b>Oficina</b></a>
         </div>
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Faça login para acessar o painel</p>
+                <p class="login-box-msg">Faça login para acessar</p>
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input type="text" name="email" class="form-control" placeholder="Utilizador" required>
+                        <input type="email" name="email" class="form-control" placeholder="Utilizador" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -45,6 +52,9 @@
                         </div>
                     </div>
                 </form>
+                <div class="mt-3 text-center">
+                    <a href="{{ route('criar') }}">Não tem uma conta? Criar Conta</a>
+                </div>
             </div>
         </div>
     </div>

@@ -21,8 +21,8 @@
 
         // Aguarda 3 segundos e redireciona para o formulário
         setTimeout(() => {
-            window.location.href = "{{ route('formulario', ['form' => 'registrar_viatura']) }}";
-        }, 3000);
+            window.location.href = "{{ route('autotech') }}";
+        }, 1000);
     }
 </script>
 </body>

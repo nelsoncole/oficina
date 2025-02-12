@@ -17,7 +17,7 @@
 <div class="panel-heading text-center"><h3>UTILIZADORES</h3></div>
 <div class="panel-body table-responsive p-0">
     <div class="input-group mb-3">
-    <button type="submit" class="btn btn-nel" data-bs-toggle="modal" data-bs-target="#model_registrar_utilizador">Registrar Utilizador</button>
+    <button type="submit" class="btn btn-nel">Registrar Utilizador</button>
 
     </div> 
     <table class="table table-hover text-nowrap">
@@ -35,12 +35,12 @@
                 @foreach($query_utilizadores as $key=>$utilizadores)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$utilizadores->codigo}}</td>
+                    <td>{{$utilizadores->id_cliente}}</td>
                     <td>{{$utilizadores->nome}}</td>
                     <td>{{$utilizadores->telefone}}</td>
-                    <td>{{$utilizadores->funcao}}</td>
-                    <td style="text-align: center;">
-                    <a href="#" id="btn-form2" class="nav-link" style="padding: 0; margin: 0;">
+                    <td>{{$utilizadores->nivel_de_acesso}}</td>
+                    <td>
+                    <a href="#" class="nav-link" style="padding: 0; margin: 0;">
                             <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </td>

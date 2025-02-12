@@ -8,11 +8,19 @@
         </li>
     </ul>
 
-    <!-- Botão Home -->
+    <!-- Botão Sair-->
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-            <a href="/" class="nav-link">
-                <i class="fas fa-home"></i> Home
+            <a href="#" class="nav-link">
+                @php
+                    $nome = Auth::user()->name;
+                @endphp
+                <p style="color:rgb(25, 14, 128);">{{$nome}}</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('logout') }}" class="nav-link">
+                Sair
             </a>
         </li>
     </ul>

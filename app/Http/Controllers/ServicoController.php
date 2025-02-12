@@ -28,7 +28,8 @@ class ServicoController extends Controller
         $servico->valor = $request->valor;
         $servico->save();
 
-        return redirect()->back();
+        //return redirect()->back();
+        return back()->with('success', 'Registro feito com sucesso!');
     
     }   
 }

@@ -19,12 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            $table->enum('nivel_de_acesso', ['Administrador', 'Gerente', 'Secretário', 'Técnico', 'Cliente']);
+            $table->enum('nivel_de_acesso', ['Administrador', 'Gerente', 'Secretario', 'Tecnico', 'Cliente']);
             $table->unsignedBigInteger('id_cliente')->nullable();
-            $table->unsignedBigInteger('id_funcionario')->nullable();
             $table->foreign('id_cliente')->references('id_cliente')->on('clientes')->onDelete('set null');
-            $table->foreign('id_funcionario')->references('id_funcionario')->on('funcionarios')->onDelete('set null');
-
             $table->timestamps();
         });
     }

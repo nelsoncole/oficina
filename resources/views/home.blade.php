@@ -13,10 +13,10 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link" href="{{ route('login') }}">[Entrar]</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('signup') }}">Cadastrar</a>
+                        <a class="nav-link" href="{{ route('criar') }}">[Criar conta]</a>
                     </li>
                 </ul>
             </div>
