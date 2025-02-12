@@ -72,14 +72,18 @@
     </div>
     <!-- Script para alternar os formulários -->
     <script>
-       document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function () {
             function mostrarFormulario(id) {
                 // Ocultar todos os formulários
                 document.querySelectorAll(".formulario").forEach(form => form.style.display = "none");
 
                 // Exibir apenas o formulário desejado
                 const form = document.getElementById(id);
-                if (form) form.style.display = "block";
+                if (form) {
+                    form.style.display = "block";
+                    // Salvar no localStorage
+                    localStorage.setItem("ultimoFormularioAberto", id);
+                }
             }
 
             // Mapear botões para seus respectivos formulários
@@ -98,6 +102,12 @@
                     botao.addEventListener("click", () => mostrarFormulario(botoes[botaoId]));
                 }
             });
+
+            // Verificar se há um formulário salvo no localStorage
+            const ultimoFormulario = localStorage.getItem("ultimoFormularioAberto");
+            if (ultimoFormulario) {
+                mostrarFormulario(ultimoFormulario);
+            }
         });
     </script>
 @endsection
