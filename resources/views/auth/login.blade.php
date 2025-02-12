@@ -11,9 +11,15 @@
 
     <?php
         if (Auth::check()) {
-            return redirect()->route('formulario');
+            return redirect()->route('autotech');
         } 
     ?>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            localStorage.clear(); // Limpa todos os dados do localStorage
+        });
+    </script>
 
     <div class="login-box">
         <div class="login-logo">
